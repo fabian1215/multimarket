@@ -1,0 +1,61 @@
+<h1>Contacts</h1>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Address</th>
+<th>Phone</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody>
+{% for Producto in productos %}
+<tr>
+<td>{{ Producto.Nombre}}</td>
+<td>{{ Producto.Descripcion }}</td>
+<td>{{ Producto.Imagen }}</td>
+<td>{{ Producto.Cantidad }}</td>
+<td>{{ Producto.Precio }}</td>
+<td>
+<a  href="{% url "producto_detalle"  Producto.id  %}">Detalle</a>
+<a  href="{% url "producto_actualizar"  Producto.id  %}">Editar</a>
+<a  href="{% url "producto_borrar"  Producto.id  %}">Borrar</a>
+</td>
+</tr>
+
+
+
+
+<h1>Productos</h1>
+
+
+
+<ul>
+    {% for producto in object_list %}
+        <li>
+            <p>{{ Producto.Nombre}}</p>
+            <p>
+    <a  href="{% url "producto_detalle"  Producto.id  %}">Detalle</a>
+<a  href="{% url "producto_actualizar"  Producto.id  %}">Editar</a>
+<a  href="{% url "producto_borrar"  Producto.id  %}">Borrar</a>
+            </p>
+        </li>
+    {% endfor %}
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endfor %}
