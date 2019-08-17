@@ -146,7 +146,6 @@
 		<header class="card-header">
 			<a class="" aria-expanded="true" href="#" data-toggle="collapse" data-target="#collapse22">
 				<i class="icon-action fa fa-chevron-down"></i>
-				
 				<h6 class="title">Por Categoria</h6>
 			</a>
 		</header>
@@ -162,11 +161,8 @@
 				</form>
 
 				<ul class="list-unstyled list-lg">
-				
-					
-					{% for Categoria in categorias %}
-					<li><a  href="{% url "producto_categoria"  Categoria.Nombre  %}">{{ Categoria.Nombre }}<span class="float-right badge badge-light round"> </span>  </a></li>
-			  {% endfor %}
+					<li><a href="#">Cras justo odio <span class="float-right badge badge-light round">142</span> </a></li>
+
 				</ul>  
 			</div> <!-- card-body.// -->
 		</div> <!-- collapse .// -->
@@ -243,7 +239,7 @@
 	</aside> <!-- col.// -->
 	<main class="col-sm-9">
 
-{% for Producto in productos %}
+{% for Producto in news_list %}
 
 <article class="card card-product">
 	<div class="card-body">
