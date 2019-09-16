@@ -1598,7 +1598,7 @@ article:after,
 
 /* ================== header main ==================  */
 .header-main {
-  padding-top: 1rem;
+  padding-top: 3.5rem;
   padding-bottom: 1rem; }
 
 .brand-wrap .logo, .navbar-brand .logo {
@@ -1643,7 +1643,7 @@ article:after,
 /* ================== PAGES =================== */
 /* ================ PAGES HEADER ================== */
 .section-pagetop {
-  padding: 45px 0;
+  padding: 5px 0;
   background-repeat: no-repeat;
   background-size: cover; }
   .section-pagetop .title-page {
@@ -2250,4 +2250,7 @@ ul.row, ul.row-sm {
     display: block;
     margin-left: 0px; }
 
+    .bg-light {
+      background-color: #2590a6 !important;
+  }
 /*# sourceMappingURL=ui.css.map */

@@ -15,7 +15,7 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
+LOGIN_REDIRECT_URL = 'producto_lista'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
@@ -30,12 +30,23 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'multimarketcorreos@gmail.com'
+EMAIL_HOST_PASSWORD = '102030internet'
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '0m7qv!+s1hd$=2vb@ous6a^p2+vyqhnl#18&gxnu8d8x^d_@qv'
 
+#redireccionar a https 
+#SECURE_SSL_REDIRECT= True
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -64,10 +75,13 @@ INSTALLED_APPS = [
     'tienda',
     'Adicionales',
     'crispy_forms',
+   
+    
     
      # Despues de que este funcionando agregar los proveedores facebook, twitter y Google
      #'allauth.socialaccount.providers.facebook'
 ]
+
 
 SITE_ID = 1
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

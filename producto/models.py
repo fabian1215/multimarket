@@ -10,8 +10,14 @@ class Categoria (models.Model):
    
 
 class Producto(models.Model):
+    Estado_Opciones = (
+    ('', 'Seleccionar estado'),
+    ('activo', 'Activo'), #First one is the value of select option and second is the displayed value in option
+    ('inactivo', 'Inactivo'),   
+    )
+    Estado = models.CharField(choices=Estado_Opciones,max_length=254, default='activo')
     Nombre= models.CharField(max_length=50)
-    Descripcion= models.CharField(max_length=254)
+    Descripcion= models.TextField()
     imagen = models.ImageField(upload_to='Productos_imagenes/')
     Cantidad= models.PositiveIntegerField()
     Precio= models.PositiveIntegerField()

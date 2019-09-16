@@ -20,12 +20,15 @@ from django.conf.urls import include
 from django.urls import include
 from django.conf.urls.static import static
 from django.conf import settings
+from . import views
+from producto import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),
-     path('productos/', include('producto.urls')),
-    
+    path('productos/', include('producto.urls')),
+    path('compra/', include('compra.urls')),
+    path('', views.ProductoLista.as_view(), name='producto_lista'),
 ]
 
 if settings.DEBUG: # new
