@@ -64,7 +64,7 @@ $(document).ready(function() {
 
 
 
-<nav class="navbar navbar-top navbar-expand-lg navbar-dark bg-secondary">
+<nav class="navbar navbar-top navbar-expand-lg navbar-dark bg-light fixed-top">
 <div class="container">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -72,27 +72,39 @@ $(document).ready(function() {
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
 <li class="nav-item active">
-<a class="nav-link" href="">Inicio <span class="sr-only">(current)</span></a>
+<a class="nav-link" href="{% url "producto_lista"   %}">Inicio <span class="sr-only">(current)</span></a>
 </li>
-<li class="nav-item"><a class="nav-link" href="html-components.html"> Ayuda </a></li>
+
+
 <li class="nav-item dropdown">
-	<a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown">  Desplegable  </a>
+	<a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown">  Productos </a>
     <ul class="dropdown-menu">
-	  <li><a class="dropdown-item" href="#"> Menu item 1</a>
-	  
-
-
-
-
-	  
+	  <li><a class="dropdown-item" href="{% url "producto_crear"   %}">Crear Producto</a>
 	  </li>
-	  <li><a class="dropdown-item" href="#"> Menu item 2 </a></li>
 
-	  <li class="nav-item">   
-	  
-	  
+	  <li><a class="dropdown-item" href="{% url "productos_ocultos"   %}">Productos ocultos</a></li>
+  </ul>
 	   </li>
+<li class="nav-item dropdown">
+	<a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown"> Categorias </a>
+    <ul class="dropdown-menu">
+	  <li><a class="dropdown-item" href="{% url "categoria_crear"   %}">Crear Categoria</a>
+	  </li>
+
+	
+
+	   </li>
+
+
     </ul>
+
+
+<li class="nav-item"><a class="nav-link" href="{% url "vercarrito"   %}"> 
+ <img src="https://www.essent.com/SiteData/SiteID34/Images/B2B-Ecommerce/B2B%20Ecommerce%202%20Cart%20Y.png" style="width:28px; height:28px;">
+ Carrito
+										</i>
+ </a></li>
+
 
   </div>
 </div> <!-- container //  -->
@@ -107,7 +119,7 @@ $(document).ready(function() {
 
 
 
-<nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar navbar-expand-lg navbar-light" style="padding-top: 3.5rem;">
   <div class="container">
   <div class="brand-wrap">
   	<img class="logo" src="https://www.essent.com/SiteData/SiteID34/Images/B2B-Ecommerce/B2B%20Ecommerce%202%20Cart%20Y.png">
@@ -468,11 +480,26 @@ $(document).ready(function() {
                 data: data,
                 success: function(data){
                     console.log('success');
-					if (data['repetido']=='no') {
-					$("#agregarAlerta").append("<div class='alert alert-success alert-dismissible' style='position: fixed;z-index: 10;top: 80%;'> <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>  <strong>Producto Agregado:</strong> se agrego el producto correctamente a el carrito de compras.</div>");
+					if (data['logueado']=='no') {
+						
+$("#agregarAlerta").append("<div class='alert alert-info alert-dismissible' style='position: fixed;z-index: 10;top: 80%;'> \
+ <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong><a href='http://127.0.0.1:8000/accounts/signup/'>Registrate</a> \
+  o  <a href='http://127.0.0.1:8000/accounts/login/'>inicia sesión</a> para añadir productos al carrito de compras:</strong></div> ");
+                    }
+					else if (data['repetido']=='no') {
+				
+$("#agregarAlerta").append("<div class='alert alert-success alert-dismissible' style='position: fixed;z-index: 10;top: 80%;'> \
+<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>  <strong>Producto Agregado:</strong>  \
+se agrego el producto correctamente a el  <a href='http://127.0.0.1:8000/compra/carrito'>carrito de compras--></a> </div>");
+
 					}
+
 					else {
-					$("#agregarAlerta").append("<div class='alert alert-info alert-dismissible' style='position: fixed;z-index: 10;top: 80%;'> <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>  <strong>Este producto ya esta en el carrito de compras:</strong> entra a la pagina de carrito de compras para completar tu compra</div> ");
+					
+$("#agregarAlerta").append("<div class='alert alert-info alert-dismissible' style='position: fixed;z-index: 10;top: 80%;'> \
+ <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>  \
+ <strong>Este producto ya esta en el carrito de compras:</strong> \
+  entra a la pagina de <a href='http://127.0.0.1:8000/compra/carrito'>carrito de compras</a> para completar tu compra</div> ");
 	
 					}
 
@@ -508,6 +535,8 @@ else {
 }
 </script>
 
+
+Style="z"
 
 </body>
 </html>

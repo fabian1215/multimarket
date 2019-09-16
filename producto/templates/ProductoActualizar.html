@@ -1,0 +1,20 @@
+{% extends 'BaseProducto.html' %}
+
+ {% load crispy_forms_tags %}
+ {% load widget_tweaks %}
+<!-- sobreescribimos el bloque sidebar para que no se muestre en la pagina de crear producto  -->
+ {% block bloquesidebar %}
+ {% endblock %}
+
+{% block bloqueproductos %}
+<h4>Editar Producto:</h4>
+
+<form method="post"  enctype="multipart/form-data">{% csrf_token %}
+   {{ form|crispy }}
+    <input type="submit" class="btn btn-success" value="Actualizar">
+
+		<a  href="{% url "producto_lista"   %}"> 
+<button type="button" class="btn btn-danger" >Cancelar</button></a>
+</form>
+
+  {% endblock %}

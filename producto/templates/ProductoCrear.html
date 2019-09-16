@@ -12,5 +12,9 @@
 <form method="post" enctype="multipart/form-data">{% csrf_token %}
     {{ form|crispy }}
     <input type="submit" class="btn btn-success" value="Crear">
+
+    	<a  href="{% url "producto_lista"   %}"> 
+<button type="button" class="btn btn-danger" >Cancelar</button></a>
+
 </form>
   {% endblock %}

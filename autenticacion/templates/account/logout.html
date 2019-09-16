@@ -1,21 +1,96 @@
 {% extends "account/base.html" %}
 
 {% load i18n %}
+{% load account %}
+
+    {% load static %}
+	  {% load bootstrap4 %}
+	  
+    {# CSS Bootstrap #}
+	  {% bootstrap_css %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% load widget_tweaks %}
+
+
 
 {% block head_title %}{% trans "Sign Out" %}{% endblock %}
-
 {% block content %}
-<h1>{% trans "Sign Out" %}</h1>
 
-<p>{% trans 'Are you sure you want to sign out?' %}</p>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<form method="post" action="{% url 'account_logout' %}">
+<link rel="stylesheet" href="{%  static 'styles.css' %}" >
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Autenticacion:</title>
+
+	<!--Custom styles-->
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+<div class="container">
+	<div class="d-flex justify-content-center h-100">
+		<div class="card">
+			<div class="card-header">
+				<h3>Autenticacion:</h3>
+				<div class="d-flex justify-content-end social_icon">
+					<span><i class="fab fa-facebook-square"></i></span>
+					<span><i class="fab fa-google-plus-square"></i></span>
+					<span><i class="fab fa-twitter-square"></i></span>
+				</div>
+			</div>
+			<div class="card-body">
+
+{% load i18n %}
+{% load account %}
+
+
+
+
+  <h4 style="color:#71e6f7;">{% trans "Sign Out" %}</h4>
+
+ 
+
+   <p  style="color:white;">{% trans 'Are you sure you want to sign out?' %}</p>
+
+   <form method="post" action="{% url 'account_logout' %}">
   {% csrf_token %}
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
   {% endif %}
-  <button type="submit">{% trans 'Sign Out' %}</button>
+  <button  class="btn btn-primary" type="submit">{% trans 'Sign Out' %}</button>
 </form>
-
-
+              
+   
+  
 {% endblock %}
+
+
+			</div>
+		
+		</div>
+	</div>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

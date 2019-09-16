@@ -72,7 +72,7 @@
 					<a  href="{% url "producto_detalle"  Producto.id  %}" class="btn btn-secondary"> Detalles </a>
 				</p>
 				
-				<a href="#"><i class="fa fa-heart"></i> Agregar a Favoritos</a>
+				<a href="{% url "producto_actualizar"  Producto.id  %}"><i class="fa fa-edit"></i>Editar</a>
 			</div> <!-- action-wrap.// -->
 		</aside> <!-- col.// -->
 	</div> <!-- row.// -->

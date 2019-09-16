@@ -2253,4 +2253,11 @@ ul.row, ul.row-sm {
     .bg-light {
       background-color: #2590a6 !important;
   }
+
+
+
+  .dropdown-menu{
+    transform: translate3d(5px, 35px, 0px)!important;
+    top: 10px;
+}
 /*# sourceMappingURL=ui.css.map */

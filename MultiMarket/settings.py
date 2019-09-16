@@ -70,9 +70,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'widget_tweaks',
     'compra',
-    'nodo',
+
     'producto',
-    'tienda',
+
     'Adicionales',
     'crispy_forms',
    
