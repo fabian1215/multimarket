@@ -24,3 +24,24 @@ class Producto(models.Model):
     Categoria = models.ForeignKey(Categoria, null=True, on_delete=models.SET_NULL)  
    # usuario = models.ForeignKey(User,on_delete=models.CASCADE, null=True)
 
+
+####################################### Requerimiento TELLEZ  ##################################
+class CalificacionProducto(models.Model):
+    CALIFICACION_PRODUCTO_CHOICES = [
+        ( 5 , '5 Puntos (Excelente)' ),
+        ( 4 , '4 Puntos (Bueno)' ),
+        ( 3 , '3 Puntos (Aceptable)' ),
+        ( 2 , '2 Puntos (Regular)' ),
+        ( 1 , '1 Puntos (Malo)' ),
+    ]
+
+    producto = models.ForeignKey(Producto, null=True, on_delete=models.SET_NULL)
+    calificacion = models.IntegerField(choices = CALIFICACION_PRODUCTO_CHOICES)
+    usuario_calificador = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    calificado = models.BooleanField()
+
+    def __str__(self):
+        return self.calificacion
+
+####################################### ¿ ##################################
+

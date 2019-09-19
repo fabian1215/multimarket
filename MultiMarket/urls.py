@@ -27,6 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),
     path('productos/', include('producto.urls')),
+    url(r'adicionales/', include('Adicionales.urls')),
     path('compra/', include('compra.urls')),
     path('', views.ProductoLista.as_view(), name='producto_lista'),
 ]

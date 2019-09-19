@@ -51,7 +51,7 @@
 <a class="nav-link" href="{% url "producto_lista"   %}">Inicio <span class="sr-only">(current)</span></a>
 </li>
 
-
+	  {% if request.user.is_staff %}
 <li class="nav-item dropdown">
 	<a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown">  Productos </a>
     <ul class="dropdown-menu">
@@ -61,18 +61,50 @@
 	  <li><a class="dropdown-item" href="{% url "productos_ocultos"   %}">Productos ocultos</a></li>
   </ul>
 	   </li>
-<li class="nav-item dropdown">
+ {% endif %}
+ 
+	    {% if request.user.is_superuser %}
+	<li class="nav-item dropdown">
 	<a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown"> Categorias </a>
     <ul class="dropdown-menu">
 	  <li><a class="dropdown-item" href="{% url "categoria_crear"   %}">Crear Categoria</a>
 	  </li>
 
-	
+	  <li><a class="dropdown-item" href="{% url "categoria_lista"   %}">Listar Categorias</a>
+	  </li>
 
-	   </li>
+ </li>
+   </ul>
+ {% endif %}
+
+<li class="nav-item dropdown">
+	<a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown"> Compras </a>
+    <ul class="dropdown-menu">
+	  <li><a class="dropdown-item" href="{% url "historial_usuario"     %}">Mis compras</a>
+	  </li>
+  {% if request.user.is_staff %}
+	<li><a class="dropdown-item"  href="{% url "historial_administrador"    %}">Compras Usuarios</a>
+</li>
+ {% endif %}
 
 
+</li>
     </ul>
+
+
+
+	<li class="nav-item dropdown">
+	<a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown"> Envios </a>
+    <ul class="dropdown-menu">
+	 {% if request.user.is_staff %}
+	  <li><a class="dropdown-item" href="http://127.0.0.1:8000/adicionales/listaEnvio">Lista Envios</a>
+	{% endif %}
+	  <li><a class="dropdown-item" href="http://127.0.0.1:8000/adicionales/detalleSeguimiento">Seguimiento Envio</a>
+	  </li>
+ </li>
+   </ul>
+
+
 
 
 <li class="nav-item"><a class="nav-link" href="{% url "vercarrito"   %}"> 
@@ -95,6 +127,7 @@
 	</div> <!-- brand-wrap.// -->
 	</div>
 	<div class="col-lg-6 col-sm-8">
+	{% block barraBusqueda %}
 			<form action="#" class="search-wrap">
 				<div class="input-group w-100">
 				    <input id="CampoBusqueda" type="text" class="form-control" style="width:55%;" placeholder="Buscar">
@@ -106,6 +139,7 @@
 				    </div>
 			    </div>
 			</form> <!-- search-wrap .end// -->
+				{% endblock %}
 	</div> <!-- col.// -->
 	<div class="col-lg-3 col-sm-6">
 						<div class="widgets-wrap d-flex justify-content-end">		
@@ -190,14 +224,7 @@
 		</header>
 		<div style="" class="filter-content collapse show" id="collapse22">
 			<div class="card-body">
-				<form class="pb-3">
-				<div class="input-group">
-				  <input class="form-control" placeholder="Buscar" type="text">
-				  <div class="input-group-append">
-				    <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
-				  </div>
-				</div>
-				</form>
+				
 
 			
 
@@ -217,68 +244,18 @@
 		<header class="card-header">
 			<a href="#" data-toggle="collapse" data-target="#collapse33">
 				<i class="icon-action fa fa-chevron-down"></i>
-				<h6 class="title">Por Precio  </h6>
+				<h6 class="title">Traducir Pagina</h6>
 			</a>
 		</header>
 		<div class="filter-content collapse show" id="collapse33">
 			<div class="card-body">
-				<input type="range"  id="barraNumerica" oninput="myFunction(this.value)" class="custom-range" min="0" max="100" name="">
-				<div class="form-row">
-				<div class="form-group col-md-6">
-				  <label>Min</label>
-				  <input class="form-control" id="CampoMinimo" placeholder="$0" type="number">
-				</div>
-				<div class="form-group text-right col-md-6">
-				  <label>Max</label>
-				  <input class="form-control" placeholder="$1,0000" type="number">
-				</div>
-				</div> <!-- form-row.// -->
-				<button class="btn btn-block btn-outline-primary">Apply</button>
+				 <div id="google_translate_element"></div>
+				
+				
 			</div> <!-- card-body.// -->
 		</div> <!-- collapse .// -->
 	</article> <!-- card-group-item.// -->
-	<article class="card-group-item">
-		<header class="card-header">
-			<a href="#" data-toggle="collapse" data-target="#collapse44">
-				<i class="icon-action fa fa-chevron-down"></i>
-				<h6 class="title">Por Marca</h6>
-			</a>
-		</header>
-		<div class="filter-content collapse show" id="collapse44">
-			<div class="card-body">
-			<form>
-				<label class="form-check">
-				  <input class="form-check-input" value="" type="checkbox">
-				  <span class="form-check-label">
-				  	<span class="float-right badge badge-light round">5</span>
-				    Samsung
-				  </span>
-				</label>  <!-- form-check.// -->
-				<label class="form-check">
-				  <input class="form-check-input" value="" type="checkbox">
-				  <span class="form-check-label">
-				  	<span class="float-right badge badge-light round">13</span>
-				    Mersedes Benz
-				  </span>
-				</label> <!-- form-check.// -->
-				<label class="form-check">
-				  <input class="form-check-input" value="" type="checkbox">
-				  <span class="form-check-label">
-				  	<span class="float-right badge badge-light round">12</span>
-				    Nissan Altima
-				  </span>
-				</label>  <!-- form-check.// -->
-				<label class="form-check">
-				  <input class="form-check-input" value="" type="checkbox">
-				  <span class="form-check-label">
-				  	<span class="float-right badge badge-light round">32</span>
-				    Another Brand
-				  </span>
-				</label>  <!-- form-check.// -->
-			</form>
-			</div> <!-- card-body.// -->
-		</div> <!-- collapse .// -->
-	</article> <!-- card-group-item.// -->
+	
 
     {% endblock %}
 </div> <!-- card.// -->
@@ -311,47 +288,44 @@
 </section>
 <!-- ========================= SECTION  END// ========================= -->
 
-
+	{% block Footer %}
 <!-- ========================= FOOTER ========================= -->
 <footer class="section-footer bg-secondary">
 	<div class="container">
 		<section class="footer-top padding-top">
 			<div class="row">
 				<aside class="col-sm-3 col-md-3 white">
-					<h5 class="title">Customer Services</h5>
+					<h5 class="title">Servicio al Cliente</h5>
 					<ul class="list-unstyled">
-						<li> <a href="#">Help center</a></li>
-						<li> <a href="#">Money refund</a></li>
-						<li> <a href="#">Terms and Policy</a></li>
-						<li> <a href="#">Open dispute</a></li>
+						<li> <a href="#">Ayuda</a></li>
+						<li> <a href="#">Terminos y Condiciones</a></li>
+		
 					</ul>
 				</aside>
 				<aside class="col-sm-3  col-md-3 white">
-					<h5 class="title">My Account</h5>
+					<h5 class="title">Mi cuenta</h5>
 					<ul class="list-unstyled">
-						<li> <a href="#"> User Login </a></li>
-						<li> <a href="#"> User register </a></li>
-						<li> <a href="#"> Account Setting </a></li>
-						<li> <a href="#"> My Orders </a></li>
-						<li> <a href="#"> My Wishlist </a></li>
+						<li> <a href="#"> Ingresar </a></li>
+						<li> <a href="#"> Registrarse </a></li>
+						<li> <a href="#">Cambiar Contraseña</a></li>
+						<li> <a href="#"> Mis ordenes </a></li>
 					</ul>
 				</aside>
 				<aside class="col-sm-3  col-md-3 white">
-					<h5 class="title">About</h5>
+					<h5 class="title">Sobre Nosotros</h5>
 					<ul class="list-unstyled">
-						<li> <a href="#"> Our history </a></li>
-						<li> <a href="#"> How to buy </a></li>
-						<li> <a href="#"> Delivery and payment </a></li>
-						<li> <a href="#"> Advertice </a></li>
-						<li> <a href="#"> Partnership </a></li>
+						<li> <a href="#"> Historia</a></li>
+						<li> <a href="#"> Como Comprar</a></li>
+						<li> <a href="#"> Anuncios </a></li>
+						<li> <a href="#"> Alianzas </a></li>
 					</ul>
 				</aside>
 				<aside class="col-sm-3">
 					<article class="white">
-						<h5 class="title">Contacts</h5>
+						<h5 class="title">Contacto</h5>
 						<p>
-							<strong>Phone: </strong> +123456789 <br> 
-						    <strong>Fax:</strong> +123456789
+							<strong>Phone: </strong> +57 313 6748201 <br> 
+						    <strong>Fax:</strong> 3136748201
 						</p>
 
 						 <div class="btn-group white">
@@ -377,18 +351,20 @@
 	</div><!-- //container -->
 	
 </footer>
+{% endblock %}
 <!-- ========================= FOOTER END // ========================= -->
 
 
 
 <!-- Script que traduce la pagina utilizando el traductor de Google //  -->
- <script type="text/javascript">
-  function googleTranslateElementInit() {
-  new google.translate.TranslateElement({pageLanguage: 'pt'}, 'google_translate_element');
-  }
-</script>
 
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'es', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+}
+</script>
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 <!-- Script que traduce la pagina utilizando el traductor de Google //  -->
 
  
@@ -405,7 +381,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '{% url "agregar_carro2"   %}',
+                url: '{% url "agregar_carro"   %}',
                 data: data,
                 success: function(data){
                     console.log('success');
@@ -448,7 +424,7 @@ function FuncionBusqueda() {
 
 
 
-	 var  busqueda = document.getElementById("CampoBusqueda").value;
+ var  busqueda = document.getElementById("CampoBusqueda").value;
 var url = "http://"+window.location.host+"/productos/busqueda/"+busqueda;
 
 if ( (busqueda.toString() == "") || (busqueda == null) ) {
@@ -468,12 +444,16 @@ else {
 {% block bloqueJavascriptAdicional %}
 {% endblock %}
 
+
+
+<link href="{%  static 'css/Google.css' %}"  rel="stylesheet" type="text/css"/>
+
+
 <style>
-    .bg-light {
+ .bg-light {
       background-color: #2590a6 !important;
   }
 </style>
-
 
 
 

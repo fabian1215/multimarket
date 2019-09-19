@@ -17,16 +17,9 @@
     
 
     <div>
-      <strong>Menu:</strong>
+   
       <ul>
         <li><a href="{% url 'producto_lista' %}">Inicio</a></li>
-        {% if user.is_authenticated %}
-        <li><a href="{% url 'account_email' %}">Cambiar Correo Electronico</a></li>
-        <li><a href="{% url 'account_logout' %}">Salir</a></li>
-        {% else %}
-        <li><a href="{% url 'account_login' %}">Ingresar</a></li>
-        <li><a href="{% url 'account_signup' %}">Registrarse</a></li>
-        {% endif %}
       </ul>
     </div>
     {% block content %}

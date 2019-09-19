@@ -20,13 +20,38 @@
 <script src="{%  static 'js/script.js' %}"  type="text/javascript"></script>
   {% endblock BloqueCSSPrincipal %}
 
+ {% block bloqueBarraUbicacion %}
+ <section class="section-pagetop bg-secondary">
+<div class="container clearfix">
+	<h2 class="title-page" id="tituloBusquedas" align="center">Compras Realizadas: </h2>
+
+</div> <!-- container //  -->
+</section>
+
+
+{% if messages %}
+   {% for message in messages %}
+	   <div class="alert alert-success" widthrole="alert">{{ message }}
+	    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+	   </div>
+	  
+   {% endfor %}
+
+{% endif %}
+
+
+{% endblock %}
+
+
+{% block Footer %}
+{% endblock %}
 {% block bloqueContenedorGlobal %}
 
 
 <!-- ========================= SECTION CONTENT   usuariohistorial========================= -->
-<section class="section-content bg padding-y border-top">
-<div class="container">
-
+ 
 <div class="row">
 	<main class="col-sm-12">
 
@@ -65,10 +90,17 @@
             </div>
 		
 	</td>
-	<td class="text-right"> 
-	<a  href="{% url "historial_detalle"  idFinalizar.id  %}" class="btn btn-secondary"> Ver Historial </a>
 
-	</td>
+	 {% if forloop.first %}
+	 	<td class="text-right"> 
+    <a  href="{% url "historial_detalle"  idFinalizar.id  %}" class="btn btn-success"> Ver Historial </a>
+    </td>
+	{% else %}
+	
+	 	<td class="text-right"> 
+    <a  href="{% url "historial_detalle"  idFinalizar.id  %}" class="btn btn-secondary"> Ver Historial </a>
+    </td>
+	 {% endif %}
 	
 </tr>
 

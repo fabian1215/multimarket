@@ -1,0 +1,74 @@
+{% extends 'BaseProducto.html' %}
+
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% block title %} SEGUIMIENTO DE ENVIO {% endblock title %}
+
+<!-- ========================= SECTION HEADER ========================= -->
+{% block barraBusqueda %}
+
+<form action="/adicionales/detalleSeguimiento" method="POST">
+    {% csrf_token %}
+    <div class="input-group">
+        <input type="text" name="codigo_seguimiento" placeholder="Escriba el codigo de envio" class="form-control">
+        <input type="submit" value="Buscar" class="btn btn-primary">
+    </div>
+
+</form>
+
+{% endblock barraBusqueda %}
+<!-- ========================= SECTION HEADER END ========================= -->
+
+<!-- ========================= SECTION CONTENT ========================= -->
+{% block  bloqueContenedorGlobal %}
+<div class="container">
+    <div class="card">
+
+        <div class="box  box-primary col-lg-12 col-md-12 ">
+            <div class="col-lg-12 col-md-12 bg-dark white">
+                <h2 class="box-title">DETALLES DEL ENVÍO</h2>
+            </div>
+
+            <div class="col-sm-3 col-md-3 col-lg-4 invoice-col">
+
+                <h5><b>Guía:</b></h5>{{ envio.codigo_seguimiento }}
+                <br>
+                <br>
+                <h5><b>ID ENVIO:</b> {{ envio.id }}</h5>          
+                <h5><b>ESTADO:</b> {{ envio.estado }}</h5>
+                <br>
+                <div>
+
+                    <h5><b>HISTORIAL DE ENVIO</b> </h5>
+                    <ul class="timeline">
+                        <li>
+                            <h6>Compra</h6>
+                            <a href="#" class="float-right">{{ envio.fecha_en_preparacion }}</a>
+                            <br>
+                        </li>
+                        <li>
+                            <h6>Envio</h6>
+                            <a href="#" class="float-right">{{ envio.fecha_envio }}</a>
+                            <br>
+                        </li>
+                        <li>
+                            <h6>Entrega</h6>
+                            <a href="#" class="float-right">{{ envio.fecha_entregado }}</a>
+                            <br>
+                        </li>
+                    </ul>
+                </div>
+               
+            </div>
+            <!-- /.col -->
+        </div>
+    </div>
+</div>
+
+
+
+
+
+</div>
+{% endblock %}
+<!-- ========================= SECTION CONTENT END========================= -->

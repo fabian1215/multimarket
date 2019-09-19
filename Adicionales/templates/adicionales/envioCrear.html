@@ -1,0 +1,50 @@
+{% extends 'BaseProducto.html' %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+<!-- Bootstrap4 files-->
+{% block title %} CREAR ENVIO {% endblock title %}
+
+<!-- ========================= SECTION HEADER ========================= -->
+{% block barraBusqueda %} {% endblock barraBusqueda %}
+<!-- ========================= SECTION HEADER END ========================= -->
+
+<!-- ========================= SECTION CONTENT ========================= -->
+{% block bloqueContenedorGlobal %}
+<div class="container">
+	<div class="row">
+		<main class="col-sm-9">
+			<h4>Envio</h4>
+			<form method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+				{{ form|crispy }}
+				<button type="submit" class="btn btn-success"> <span class="fa fa-save"></span> Guardar</button>
+				<a href="{% url 'envio_lista' %}" class="btn btn-danger"><span class="fa fa-undo"></span> Cancelar</a>
+			</form>
+		</main> <!-- col.// -->
+	</div>
+</div> <!-- container .//  -->
+{% endblock  %}
+<!-- ========================= SECTION CONTENT END ========================= -->
+
+
+
+{% block scripts_local %}
+
+<script>
+	$(function () {
+		$("#id_fecha_entregado").datetimepicker({
+			format: 'd/m/Y',
+			timepicker: false
+		});
+	}); 
+</script>
+<script>
+	$(function () {
+		$("#id_fecha_envio").datetimepicker({
+			format: 'd/m/Y',
+			timepicker: false
+		});
+	}); 
+</script>
+{% endblock scripts_local %}

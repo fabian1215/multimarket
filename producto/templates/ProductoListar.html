@@ -16,47 +16,35 @@
 				<h4 class="title">{{ Producto.Nombre}} </h4>
 				<div class="rating-wrap  mb-2">
 					<ul class="rating-stars">
-						<li style="width:80%" class="stars-active"> 
-							<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-							<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-							<i class="fa fa-star"></i> 
-						</li>
-						<li>
-							<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-							<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-							<i class="fa fa-star"></i> 
-						</li>
+					
 					</ul>
-					<div class="label-rating">132 reviews</div>
+					{% comment %} <div class="label-rating">132 reviews</div> {% endcomment %}
 					<div class="label-rating"> {{ Producto.Cantidad }} unidad (es) </div>
 				</div> <!-- rating-wrap.// -->
-				<p> {{ Producto.Descripcion | truncatechars:100 }} </p>
-				<dl class="dlist-align">
-				  <dt>Color</dt>
-				  <dd>Black and white</dd>
-				</dl>  <!-- item-property-hor .// -->
-				<dl class="dlist-align">
-				  <dt>Material</dt>
-				  <dd>Syntetic, wooden</dd>
-				</dl>  <!-- item-property-hor .// -->
-				<dl class="dlist-align">
-				  <dt>Delivery</dt>
-				  <dd>Russia, USA, and Europe</dd>
-				</dl>  <!-- item-property-hor .// -->
+				<p> {{ Producto.Descripcion | truncatechars:160 }} </p>
+		
 			
 		</article> <!-- col.// -->
 		<aside class="col-sm-3 border-left">
 			<div class="action-wrap">
 				<div class="price-wrap h4">
 					<span class="price"> {{ Producto.Precio }} </span>	
-					<del class="price-old"> $98</del>
+					
 				</div> <!-- info-price-detail // -->
 				<p class="text-success">Envio Gratis</p>
 				<br>
 				<p>  
-					   <a href="javascript:void(0);" data-id="{{ Producto.id }}"  class="btn btn-primary add_to_cart">Comprar</a>
+				  	{% if Producto.Cantidad >= 1 %}
+ <a href="javascript:void(0);" data-id="{{ Producto.id }}" disabled  class="btn btn-primary add_to_cart">Comprar</a>
+	{% else %}
+	 <a href="javascript:void(0);"  class="btn btn-secondary">Agotado</a>
+     	{% endif %}
+					  
 
 					<a  href="{% url "producto_detalle"  Producto.id  %}" class="btn btn-secondary"> Detalles </a>
+					  {% if request.user.is_staff %}
+					<a href="{% url "producto_actualizar"  Producto.id  %}"><i class="fa fa-edit"></i>Editar</a>
+					   {% endif %}
 				</p>
 			
 			</div> <!-- action-wrap.// -->

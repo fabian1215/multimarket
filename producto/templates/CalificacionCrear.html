@@ -1,0 +1,26 @@
+{% extends 'BaseProducto.html' %}
+
+ {% load crispy_forms_tags %}
+ {% load widget_tweaks %}
+<!-- sobreescribimos el bloque sidebar para que no se muestre en la pagina de crear producto  -->
+ {% block bloquesidebar %}
+ {% endblock %}
+
+
+<!-- ========================= SECTION CONTENT ========================= -->
+{% block bloqueproductos %}
+<div class="container">
+	<div class="row">
+		<main class="col-sm-9">
+		<h4>Calificar producto</h4>
+		<form method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form|crispy }}
+			<button type="submit" class="btn btn-success"> <span class="fa fa-save"></span> Guardar</button>
+			<a href="{% url 'producto_lista' %}" class="btn btn-danger"><span class="fa fa-undo"></span> Cancelar</a>
+ 		</form>
+		</main> <!-- col.// -->
+	</div>
+</div> <!-- container .//  -->
+{% endblock %}
+<!-- ========================= SECTION CONTENT END ========================= -->

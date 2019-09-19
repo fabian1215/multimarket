@@ -75,7 +75,7 @@ $(document).ready(function() {
 <a class="nav-link" href="{% url "producto_lista"   %}">Inicio <span class="sr-only">(current)</span></a>
 </li>
 
-
+	  {% if request.user.is_staff %}
 <li class="nav-item dropdown">
 	<a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown">  Productos </a>
     <ul class="dropdown-menu">
@@ -85,18 +85,38 @@ $(document).ready(function() {
 	  <li><a class="dropdown-item" href="{% url "productos_ocultos"   %}">Productos ocultos</a></li>
   </ul>
 	   </li>
+ {% endif %}
+
+  {% if request.user.is_staff %}
 <li class="nav-item dropdown">
 	<a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown"> Categorias </a>
     <ul class="dropdown-menu">
 	  <li><a class="dropdown-item" href="{% url "categoria_crear"   %}">Crear Categoria</a>
 	  </li>
+	<!--############################### TELLEZ ##########################################################-->
+	<li><a class="dropdown-item" href="{% url "categoria_lista"   %}">Listar Categorias</a>
+</li>
+	<!--#########################################################################################-->
 
-	
-
-	   </li>
-
-
+</li>
     </ul>
+ {% endif %}
+
+
+<li class="nav-item dropdown">
+	<a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown"> Compras </a>
+    <ul class="dropdown-menu">
+	  <li><a class="dropdown-item" href="{% url "historial_usuario"     %}">Mis compras</a>
+	  </li>
+  {% if request.user.is_staff %}
+	<li><a class="dropdown-item"  href="{% url "historial_administrador"    %}">Compras Usuarios</a>
+</li>
+ {% endif %}
+
+
+</li>
+    </ul>
+
 
 
 <li class="nav-item"><a class="nav-link" href="{% url "vercarrito"   %}"> 
@@ -106,7 +126,14 @@ $(document).ready(function() {
  </a></li>
 
 
+<li class="nav-item active" style="width: 200px;">
+<div id="google_translate_element" style="padding-top: 5px;
+padding-left: 300px;"></div>
   </div>
+</li>
+
+
+
 </div> <!-- container //  -->
 </nav>
 
@@ -129,36 +156,7 @@ $(document).ready(function() {
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarTop">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">   Sourcing </a>
-            <ul class="dropdown-menu">
-				<li><a class="dropdown-item" href="#">Top  Suppliers</a></li>
-				<li><a class="dropdown-item" href="#">Suppliers by Regions </a></li>
-				<li><a class="dropdown-item" href="#">Online Retailer  </a></li>
-            </ul>
-        </li>
-		<li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">   Services </a>
-            <ul class="dropdown-menu">
-				<li><a class="dropdown-item" href="#">Trade Assurance </a></li>
-				<li><a class="dropdown-item" href="#">Arabic</a></li>
-				<li><a class="dropdown-item" href="#">Logistics Service </a></li>
-				<li><a class="dropdown-item" href="#">Membership Services</a></li>
-            </ul>
-        </li>
-		<li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">   Community </a>
-            <ul class="dropdown-menu">
-				<li><a class="dropdown-item" href="#">Help Center</a></li>
-				<li><a class="dropdown-item" href="#">Submit a Dispute </a></li>
-				<li><a class="dropdown-item" href="#">For Suppliers </a></li>
-            </ul>
-        </li>
-      </ul>
-      <ul class="navbar-nav">
-   
-		
-      </ul> <!-- navbar-nav.// -->
-    </div> <!-- collapse.// -->
+    
   </div>
 </nav>
 
@@ -214,12 +212,19 @@ $(document).ready(function() {
 										Login 
 										{% endif %}
 											<i class="fa fa-caret-down"></i>
-												<ul class="dropdown-menu dropdown-menu-right">
+												<ul class="dropdown-menu"  >
 													{% if user.is_authenticated %}
+												
+													<a class="dropdown-item" href="http://127.0.0.1:8000/accounts/logout/">
 														<li>Logout</li>
+														</a>
 													{% else %}
+													<a class="dropdown-item" href="http://127.0.0.1:8000/accounts/signup/">
 														<li>Registrarse</li>
+														</a>
+														<a class="dropdown-item" href="http://127.0.0.1:8000/accounts/login/">
 														<li>Login</li>
+														</a>
 														
 													{% endif %}
 												</ul>
@@ -300,15 +305,50 @@ $(document).ready(function() {
 			  </dd>
 			</dl>  <!-- item-property .// -->
 		</div> <!-- col.// -->
-		<div class="col-sm-7">
-		
-		
-		 <!-- item-property .// -->
-		</div> <!-- col.// -->
+		<hr>
+									<dl>
+									
 	</div> <!-- row.// -->
 	<hr>
-	<a href="#" class="btn  btn-warning"> <i class="fa fa-envelope"></i> Hacer Pregunta </a>
-	  <a href="javascript:void(0);" data-id="{{ object.id }}"  class="btn  btn-outline-warning add_to_cart">Comprar</a>
+<!-- ############################################# TELLEZ ########################33333-->
+										<dt>Calificación del producto:</dt>
+										<div class="rating-wrap  mb-2">
+											<ul class="rating-stars">
+
+												<li style="width: {{ porcentajeEstrellas }} " class="stars-active">
+													<i class="fa fa-star"></i> <i class="fa fa-star"></i>
+													<i class="fa fa-star"></i> <i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+												</li>
+												<li>
+													<i class="fa fa-star"></i> <i class="fa fa-star"></i>
+													<i class="fa fa-star"></i> <i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+												</li>
+											</ul>
+											<div class="label-rating">{{ numeroCalificaciones }} calificacion(es)</div>
+										</div>
+										
+									</dl>
+									<hr>
+							
+									{% if habilitado == True %}
+									<button onclick="FuncionUrl( {{ object.id }} )" class="btn btn-warning"
+										type="submit"><i class="fa fa-star"></i> Calificar</button>
+									{% else %}
+									<button disabled onclick="FuncionUrl( {{ object.id }} )"  title="Ya calificaste este producto" class="btn btn-warning"
+										type="submit"><i class="fa fa-star"></i> Calificado </button>
+									{% endif %}
+									<!-- ####################################################################-->
+
+
+ 	{% if object.Cantidad >= 1 %}
+  <a href="javascript:void(0);"  data-id="{{ object.id }}"    class="btn  btn-outline-warning add_to_cart">Comprar</a>
+	{% else %}
+	 <a href="javascript:void(0);"  title="Este producto no se encuentra en existencia" class="btn  btn-outline-warning">Agotado</a>
+     	{% endif %}
+
+	 
 <!-- short-info-wrap .// -->
 </article> <!-- card-body.// -->
 		</aside> <!-- col.// -->
@@ -371,40 +411,37 @@ $(document).ready(function() {
 		<section class="footer-top padding-top">
 			<div class="row">
 				<aside class="col-sm-3 col-md-3 white">
-					<h5 class="title">Customer Services</h5>
+					<h5 class="title">Servicio al Cliente</h5>
 					<ul class="list-unstyled">
-						<li> <a href="#">Help center</a></li>
-						<li> <a href="#">Money refund</a></li>
-						<li> <a href="#">Terms and Policy</a></li>
-						<li> <a href="#">Open dispute</a></li>
+						<li> <a href="#">Ayuda</a></li>
+						<li> <a href="#">Terminos y Condiciones</a></li>
+		
 					</ul>
 				</aside>
 				<aside class="col-sm-3  col-md-3 white">
-					<h5 class="title">My Account</h5>
+					<h5 class="title">Mi cuenta</h5>
 					<ul class="list-unstyled">
-						<li> <a href="#"> User Login </a></li>
-						<li> <a href="#"> User register </a></li>
-						<li> <a href="#"> Account Setting </a></li>
-						<li> <a href="#"> My Orders </a></li>
-						<li> <a href="#"> My Wishlist </a></li>
+						<li> <a href="#"> Ingresar </a></li>
+						<li> <a href="#"> Registrarse </a></li>
+						<li> <a href="#">Cambiar Contraseña</a></li>
+						<li> <a href="#"> Mis ordenes </a></li>
 					</ul>
 				</aside>
 				<aside class="col-sm-3  col-md-3 white">
-					<h5 class="title">About</h5>
+					<h5 class="title">Sobre Nosotros</h5>
 					<ul class="list-unstyled">
-						<li> <a href="#"> Our history </a></li>
-						<li> <a href="#"> How to buy </a></li>
-						<li> <a href="#"> Delivery and payment </a></li>
-						<li> <a href="#"> Advertice </a></li>
-						<li> <a href="#"> Partnership </a></li>
+						<li> <a href="#"> Historia</a></li>
+						<li> <a href="#"> Como Comprar</a></li>
+						<li> <a href="#"> Anuncios </a></li>
+						<li> <a href="#"> Alianzas </a></li>
 					</ul>
 				</aside>
 				<aside class="col-sm-3">
 					<article class="white">
-						<h5 class="title">Contacts</h5>
+						<h5 class="title">Contacto</h5>
 						<p>
-							<strong>Phone: </strong> +123456789 <br> 
-						    <strong>Fax:</strong> +123456789
+							<strong>Phone: </strong> +57 313 6748201 <br> 
+						    <strong>Fax:</strong> 3136748201
 						</p>
 
 						 <div class="btn-group white">
@@ -419,17 +456,16 @@ $(document).ready(function() {
 			<br> 
 		</section>
 		<section class="footer-bottom row border-top-white">
-			<div class="col-sm-6"> 
-				<p class="text-white-50"> Made with <3 <br>  by Vosidiy M.</p>
-			</div>
-			<div class="col-sm-6">
-				<p class="text-md-right text-white-50">
-	Copyright &copy  <br>
+		
+			<div class="col-sm-6 text-right">
+				<p class="text-sm-right text-white-50">
+	Copyright &copy 2018 <br>
 <a href="http://bootstrap-ecommerce.com" class="text-white-50">Bootstrap-ecommerce UI kit</a>
 				</p>
 			</div>
 		</section> <!-- //footer-top -->
 	</div><!-- //container -->
+	
 </footer>
 <!-- ========================= FOOTER END // ========================= -->
 <script type="text/javascript">
@@ -476,7 +512,7 @@ $(document).ready(function() {
 
             $.ajax({
                 type: 'POST',
-                url: '{% url "agregar_carro2"   %}',
+                url: '{% url "agregar_carro"   %}',
                 data: data,
                 success: function(data){
                     console.log('success');
@@ -533,10 +569,16 @@ else {
 
 
 }
+
+		function FuncionUrl(id) {
+			var url = "http://" + window.location.host + "/productos/calificarproducto/" + id;
+			document.location.href = url;
+		}
 </script>
 
 
-Style="z"
+
+<link href="{%  static 'css/Google.css' %}"  rel="stylesheet" type="text/css"/>
 
 </body>
 </html>

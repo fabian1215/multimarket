@@ -1,0 +1,26 @@
+/* start dark google translate theme */
+div#google_translate_element div.goog-te-gadget-simple{
+    background-color: #333;
+    border-color: #222;
+  }
+  
+  div#google_translate_element div.goog-te-gadget-simple a.goog-te-menu-value span{
+    color: #ccc;
+  }
+      
+  div#google_translate_element div.goog-te-gadget-simple a.goog-te-menu-value span:hover{
+    color:#eee;
+  }
+  /* end dark google translate theme */
+  
+  /* styling */
+  
+  
+  
+  
+  .goog-te-banner-frame.skiptranslate {
+      display: none !important;
+      } 
+  body {
+      top: 0px !important; 
+      }

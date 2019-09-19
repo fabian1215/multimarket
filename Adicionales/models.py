@@ -1,20 +1,30 @@
 from django.db import models
+from django.utils.crypto import get_random_string
+from producto.models import *
+from compra.models import *
+from django.utils import timezone
 
-# Create your models here.
-class Regalo(models.Model):
-    id_regalo= models.IntegerField()
-    Valor_regalo= models.IntegerField()
-    imagen = models.FileField(upload_to='Regalo_imagenes/')
-    Correo_Para= models.CharField(max_length=50)
-    Nombre_De= models.CharField(max_length=50)
-    Mensaje= models.CharField(max_length=200)
-    Cantidad= models.IntegerField()
-    FechaentregaR = models.DateTimeField()
+
 
    # usuario = models.ForeignKey(User,on_delete=models.CASCADE, null=True)   
-class Envio (models.Model):
-    Codigo_Seguimiento= models.IntegerField(primary_key=True)
-    estado= models.CharField(max_length=50)
-    fecha_envio = models.DateTimeField()
-    fecha_entregado = models.DateTimeField()
 
+class Envio(models.Model):
+  
+    ESTADO_ENVIO_CHOICES = [
+
+        ( 'ENVIADO' , 'Enviado' ),
+        ( 'ENTREGADO' , 'Entregado' ),
+    ]
+
+    codigo_seguimiento= models.CharField(max_length=10, verbose_name='Codigo de Seguimiento' )
+    estado= models.CharField(max_length=50,  choices = ESTADO_ENVIO_CHOICES, default = 'PREPARACION')
+    fecha_en_preparacion = models.DateTimeField( verbose_name='Fecha en preparacion')
+    fecha_envio = models.DateTimeField( verbose_name='Fecha de envio', null=True)
+    fecha_entregado = models.DateTimeField( verbose_name='Fecha de entrega', null=True)
+    usuario= models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    
+
+    def __str__(self):
+        return self.codigo_seguimiento
+
+    
