@@ -7,7 +7,7 @@ django-bootstrap4==0.0.8
 django-crispy-forms==1.7.2
 django-paypal==1.0.0
 django-widget-tweaks==1.4.5
-djangorestframework==3.10.3
+djangorestframework==3.11.2
 idna==2.8
 oauthlib==3.0.1
 Pillow==6.1.0
